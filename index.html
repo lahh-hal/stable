@@ -1,0 +1,57 @@
+<html>
+  <head>
+    <script src="https://unpkg.com/stable-diffusion@0.2.0/dist/stable-diffusion.min.js"></script>
+    <style>
+      #canvas {
+        width: 500px;
+        height: 500px;
+        border: 1px solid black;
+      }
+      #input-form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 20px;
+      }
+      #input-form input[type="text"] {
+        width: 200px;
+        height: 30px;
+        font-size: 16px;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+      #input-form input[type="submit"] {
+        width: 100px;
+        height: 30px;
+        background-color: lightblue;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="canvas"></div>
+    <form id="input-form">
+      <input type="text" id="input-text" placeholder="Enter text here">
+      <input type="submit" value="Submit">
+    </form>
+    <script>
+      const canvas = new stableDiffusion.Canvas('#canvas', {
+        width: 500,
+        height: 500,
+        alpha: 0.04,
+        color: [0, 0, 0]
+      });
+      canvas.start();
+      
+      const form = document.getElementById('input-form');
+      const inputText = document.getElementById('input-text');
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        canvas.setText(inputText.value);
+      });
+    </script>
+  </body>
+</html>
